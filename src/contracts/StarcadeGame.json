@@ -1,0 +1,206 @@
+{
+  "address": "0xD24C34891FE2155792C925eC415Ac1039e544A02",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true,  "internalType": "address", "name": "player",    "type": "address" },
+        { "indexed": true,  "internalType": "uint8",   "name": "badgeId",   "type": "uint8"   },
+        { "indexed": false, "internalType": "string",  "name": "name",      "type": "string"  }
+      ],
+      "name": "AchievementUnlocked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true,  "internalType": "address", "name": "player",    "type": "address" },
+        { "indexed": false, "internalType": "uint40",  "name": "timestamp", "type": "uint40"  },
+        { "indexed": false, "internalType": "uint16",  "name": "streak",    "type": "uint16"  }
+      ],
+      "name": "CheckedIn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true,  "internalType": "address", "name": "player",    "type": "address" },
+        { "indexed": false, "internalType": "uint32",  "name": "score",     "type": "uint32"  },
+        { "indexed": false, "internalType": "uint8",   "name": "level",     "type": "uint8"   },
+        { "indexed": false, "internalType": "bool",    "name": "win",       "type": "bool"    },
+        { "indexed": true,  "internalType": "bytes32", "name": "sessionId", "type": "bytes32" },
+        { "indexed": false, "internalType": "uint40",  "name": "timestamp", "type": "uint40"  }
+      ],
+      "name": "ScoreSubmitted",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "BADGE_DAILY_DEVOTEE",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "BADGE_FIRST_BLOOD",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "BADGE_GALAXY_BRAIN",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "BADGE_HIGH_ROLLER",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "BADGE_LEGENDARY_PILOT",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "BADGE_SECTOR_ACE",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "CHECKIN_COOLDOWN",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_LEADERBOARD",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_SCORE",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "dailyCheckIn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLeaderboard",
+      "outputs": [
+        {
+          "components": [
+            { "internalType": "address", "name": "player",    "type": "address" },
+            { "internalType": "uint32",  "name": "score",     "type": "uint32"  },
+            { "internalType": "uint8",   "name": "level",     "type": "uint8"   },
+            { "internalType": "bool",    "name": "win",       "type": "bool"    },
+            { "internalType": "uint40",  "name": "timestamp", "type": "uint40"  }
+          ],
+          "internalType": "struct StarcadeGame.LeaderboardEntry[10]",
+          "name": "",
+          "type": "tuple[10]"
+        },
+        { "internalType": "uint8", "name": "size", "type": "uint8" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "address", "name": "player", "type": "address" }],
+      "name": "getPlayerStats",
+      "outputs": [
+        {
+          "components": [
+            { "internalType": "uint32",  "name": "personalBest",     "type": "uint32"  },
+            { "internalType": "uint8",   "name": "bestLevel",        "type": "uint8"   },
+            { "internalType": "uint256", "name": "achievementBits",  "type": "uint256" },
+            { "internalType": "uint40",  "name": "lastCheckIn",      "type": "uint40"  },
+            { "internalType": "uint16",  "name": "checkInStreak",    "type": "uint16"  },
+            { "internalType": "uint32",  "name": "totalSubmissions", "type": "uint32"  }
+          ],
+          "internalType": "struct StarcadeGame.PlayerStats",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "address", "name": "player", "type": "address" }],
+      "name": "hasCheckedInToday",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "player",    "type": "address" },
+        { "internalType": "bytes32", "name": "sessionId", "type": "bytes32" }
+      ],
+      "name": "isSessionUsed",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "name": "leaderboard",
+      "outputs": [
+        { "internalType": "address", "name": "player",    "type": "address" },
+        { "internalType": "uint32",  "name": "score",     "type": "uint32"  },
+        { "internalType": "uint8",   "name": "level",     "type": "uint8"   },
+        { "internalType": "bool",    "name": "win",       "type": "bool"    },
+        { "internalType": "uint40",  "name": "timestamp", "type": "uint40"  }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "leaderboardSize",
+      "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint32",  "name": "score",     "type": "uint32"  },
+        { "internalType": "uint8",   "name": "level",     "type": "uint8"   },
+        { "internalType": "bool",    "name": "win",       "type": "bool"    },
+        { "internalType": "bytes32", "name": "sessionId", "type": "bytes32" }
+      ],
+      "name": "submitScore",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+      "name": "usedSessions",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

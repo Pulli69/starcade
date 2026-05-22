@@ -1,0 +1,294 @@
+/* ==========================================================================
+   NEON SHIFT // RETRO SYNTHWAVE DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* Color Palette (HSL Tailored for Premium Contrast and Vibrant Glow) */
+  --bg-darker: #06060c;
+  --bg-dark: #0d0d18;
+  --bg-panel: rgba(13, 13, 24, 0.75);
+  
+  --neon-pink: #ff007f;
+  --neon-pink-glow: rgba(255, 0, 127, 0.4);
+  
+  --neon-cyan: #00f0ff;
+  --neon-cyan-glow: rgba(0, 240, 255, 0.4);
+  
+  --neon-purple: #9d00ff;
+  --neon-purple-glow: rgba(157, 0, 255, 0.4);
+  
+  --neon-yellow: #ffea00;
+  --neon-yellow-glow: rgba(255, 234, 0, 0.4);
+
+  --neon-green: #39ff14;
+  --neon-green-glow: rgba(57, 255, 20, 0.4);
+
+  /* Typography */
+  --font-retro: 'Press Start 2P', monospace;
+  --font-cyber: 'Orbitron', sans-serif;
+  --font-brand: 'Audiowide', sans-serif;
+  
+  /* Layout Options */
+  color-scheme: dark;
+}
+
+/* Reset & Core Setup */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-darker);
+  color: #e2e8f0;
+  font-family: var(--font-cyber);
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CRT Screen Curvature & Flickering Effect */
+.crt-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 65%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Horizontal Retro Scanlines */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.15) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.85;
+}
+
+/* Glassmorphic Cyber Panels */
+.cyber-panel {
+  background: rgba(6, 6, 12, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  padding: 2rem;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.cyber-panel:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.7);
+}
+
+/* Neon Text Glow Utilities */
+.text-glow-pink {
+  color: #fff;
+  text-shadow: 0 0 8px var(--neon-pink-glow);
+}
+
+.text-glow-cyan {
+  color: #fff;
+  text-shadow: 0 0 8px var(--neon-cyan-glow);
+}
+
+.text-glow-yellow {
+  color: #fff;
+  text-shadow: 0 0 8px var(--neon-yellow-glow);
+}
+
+.text-glow-green {
+  color: #fff;
+  text-shadow: 0 0 8px var(--neon-green-glow);
+}
+
+/* Cyber Neon Buttons */
+.cyber-button {
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-retro);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.7rem 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:hover {
+  transform: scale(1.02);
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.cyber-button:active {
+  transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 5px #fff,
+                 0 0 10px var(--neon-pink),
+                 0 0 20px var(--neon-pink),
+                 0 0 40px var(--neon-pink);
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.4;
+  }
+}
+
+.flicker-animation {
+  animation: flicker 3s infinite alternate;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Pulse animation for HUD status bars */
+@keyframes pulse {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.7; }
+}
+
+.pulse-animation {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Game Interface Viewport Wrapper */
+.game-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-darker);
+}
+
+/* Clean Custom Scrollbar (If panels overflow) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink);
+}
+
+/* Mobile Portrait Warning Overlay */
+.landscape-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-darker);
+  z-index: 999999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+}
+
+.landscape-warning .icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  animation: rotatePhone 2s infinite ease-in-out;
+}
+
+@keyframes rotatePhone {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(-90deg); }
+  100% { transform: rotate(-90deg); }
+}
+
+/* Media Query: Enforce Landscape */
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  .landscape-warning {
+    display: flex;
+  }
+  .game-viewport {
+    display: none !important;
+  }
+}
