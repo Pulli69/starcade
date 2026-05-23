@@ -83,7 +83,7 @@ function App() {
       if (audio.paused) {
         // Start from a random timestamp if metadata is loaded
         const playWithRandomTime = () => {
-          if (audio.duration > 0) {
+          if (audio.duration > 0 && isFinite(audio.duration)) {
             audio.currentTime = Math.random() * audio.duration;
           }
           audio.play().catch(e => console.log('Autoplay prevented by browser:', e));
