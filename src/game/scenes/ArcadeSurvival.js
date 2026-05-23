@@ -191,6 +191,12 @@ export default class ArcadeSurvival extends Phaser.Scene {
     this.shipTint = colorMap[chosenColor] || 0xff007f;
     this.player.setTint(this.shipTint);
 
+    // Add a bright glowing aura to make the ship stand out against the dark background
+    if (this.player.preFX) {
+      // addGlow(color, outerStrength, innerStrength, knockout, quality, distance)
+      this.player.preFX.addGlow(this.shipTint, 4, 0, false, 0.1, 24);
+    }
+
     // Engine exhaust trail
     this.engineTrail = this.add.particles(0, 0, 'engineTrailTexture', {
       speed: { min: 10, max: 30 },
