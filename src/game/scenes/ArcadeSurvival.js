@@ -192,10 +192,10 @@ export default class ArcadeSurvival extends Phaser.Scene {
     this.player.setTint(this.shipTint);
 
     // Add a bright glowing aura to make the ship stand out against the dark background
-    if (this.player.preFX) {
-      // addGlow(color, outerStrength, innerStrength, knockout, quality, distance)
-      this.player.preFX.addGlow(this.shipTint, 4, 0, false, 0.1, 24);
-    }
+    // Using a Graphics object ensures it works across all devices, even without WebGL FX support
+    this.playerAuraGlow = this.add.graphics();
+    this.playerAuraGlow.setDepth(DEPTH.PLAYER - 1);
+    this.playerAuraGlow.setBlendMode(Phaser.BlendModes.ADD);
 
     // Engine exhaust trail
     this.engineTrail = this.add.particles(0, 0, 'engineTrailTexture', {
@@ -480,6 +480,7 @@ export default class ArcadeSurvival extends Phaser.Scene {
   update(time, delta) {
     if (this.health <= 0) {
       if (this.playerLocatorReticle) this.playerLocatorReticle.clear();
+      if (this.playerAuraGlow) this.playerAuraGlow.clear();
       return;
     }
 
@@ -959,6 +960,17 @@ export default class ArcadeSurvival extends Phaser.Scene {
       this.engineTrail.setParticleSpeed({ min: 10, max: 30 });
     }
     this.engineTrail.setFrequency(trailFrequency);
+
+    // Update player aura glow
+    if (this.playerAuraGlow && this.player.active) {
+      this.playerAuraGlow.clear();
+      const auraAlpha = 0.35 + Math.sin(time / 150) * 0.15;
+      this.playerAuraGlow.fillStyle(this.shipTint, auraAlpha);
+      this.playerAuraGlow.fillCircle(this.player.x, this.player.y, 28);
+      // Bright white inner core for extra contrast
+      this.playerAuraGlow.fillStyle(0xffffff, auraAlpha * 0.6);
+      this.playerAuraGlow.fillCircle(this.player.x, this.player.y, 14);
+    }
 
     // ---- SHIELD ----
     if (this.isShielded) {
